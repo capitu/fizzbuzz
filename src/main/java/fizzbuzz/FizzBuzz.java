@@ -2,9 +2,9 @@ package fizzbuzz;
 
 public class FizzBuzz {
 
-    public static final String FIZZ = "fizz";
-    public static final String BUZZ = "buzz";
-    public static final String FIZZBUZZ = "fizz buzz";
+    private static final String FIZZ = "fizz";
+    private static final String BUZZ = "buzz";
+    private static final String FIZZBUZZ = "fizz buzz";
 
 
     /**
