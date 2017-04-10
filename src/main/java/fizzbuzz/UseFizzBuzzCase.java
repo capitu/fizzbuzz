@@ -7,13 +7,10 @@ public class UseFizzBuzzCase {
     private static int start;
     private static int end;
 
-    /**
-     * Esempio uso
-     * @param args
-     */
+
     public static void main(String[] args) {
 
-        if(args.length > 1) {
+        if (args.length > 1) {
             try {
                 start = Integer.valueOf(args[0]);
                 end = Integer.valueOf(args[1]);
@@ -24,15 +21,12 @@ public class UseFizzBuzzCase {
         } else {
             setDefaults();
         }
-        for (int i = start; i<end + 1; i++) {
+        for (int i = start; i < end + 1; i++) {
             System.out.println("Input: " + i + ", output: " + FizzBuzz.fizzBuzz(i));
         }
     }
 
-    /**
-     * Di default stampa da 1 a 100
-     */
-    private static void setDefaults(){
+    private static void setDefaults() {
         start = DEFAULT_START;
         end = DEFAULT_END;
     }
