@@ -21,9 +21,9 @@ rio_modules = []
 @task
 def deploy(version=''):
     if confirm(yellow("Create new maven build and zip archive?")):
-
         pushToMaster(version)
         mvnbuild()
+        local("git checkout develop")
         build_version = getPomVersion()
 
 
@@ -64,7 +64,6 @@ def pushToMaster(version):
     local("git checkout master")
     local("git merge develop --no-ff --no-edit")
     local("git push origin master --follow-tags")
-    local("git checkout develop")
     print(green("push to master end"))
 
 def addPomFilesToGit():
