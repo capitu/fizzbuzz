@@ -53,8 +53,8 @@ def pushToMaster(version):
 
     addPomFilesToGit()
 
-    local("git commit -m\"" + COMMIT_MESSAGE + "\"")
-    local("git tag -a war" + version + " -m '" + COMMIT_MESSAGE + version + "'")
+    local("git commit -m\"" + COMMIT_MESSAGE + version + "\"")
+    local("git tag -a war" + next_version + " -m '" + COMMIT_MESSAGE + version + "'")
     local("git push origin develop --follow-tags")
 
     print(green("commit_build end"))
