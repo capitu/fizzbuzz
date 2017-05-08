@@ -21,9 +21,8 @@ rio_modules = []
 @task
 def deploy(version=''):
     if confirm(yellow("Create new maven build and zip archive?")):
-        changeDeployVersion(version)
-        currentVersion = getPomVersion()
-        pushToMaster(currentVersion)
+
+        pushToMaster(version)
         mvnbuild()
         build_version = getPomVersion()
 
@@ -50,11 +49,13 @@ def pushToMaster(version):
     print(green("prepare_branch end"))
 
     print(yellow("commit_build start"))
-
+    changeDeployVersion(version)
+    currentVersion = getPomVersion()
+    print("current version: " + currentVersion)
     addPomFilesToGit()
 
-    local("git commit -m\"" + COMMIT_MESSAGE + version + "\"")
-    local("git tag -a war" + next_version + " -m '" + COMMIT_MESSAGE + version + "'")
+    local("git commit -m\"" + COMMIT_MESSAGE + currentVersion + "\"")
+    local("git tag -a war" + currentVersion + " -m '" + COMMIT_MESSAGE + currentVersion + "'")
     local("git push origin develop --follow-tags")
 
     print(green("commit_build end"))
