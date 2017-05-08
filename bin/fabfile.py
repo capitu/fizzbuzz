@@ -55,14 +55,14 @@ def pushToMaster(version):
     addPomFilesToGit()
 
     local("git commit -m\"" + COMMIT_MESSAGE + currentVersion + "\"")
-    local("git tag -a war" + currentVersion + " -m '" + COMMIT_MESSAGE + currentVersion + "'")
+    local("git tag -a jar" + currentVersion + " -m '" + COMMIT_MESSAGE + currentVersion + "'")
     local("git push origin develop --follow-tags")
 
     print(green("commit_build end"))
 
     print(yellow("bring_changes_master start"))
     local("git checkout master")
-    local("git merge develop --no-ff")
+    local("git merge develop --no-ff --no-edit")
     local("git push origin master --follow-tags")
     local("git checkout develop")
     print(green("push to master end"))
@@ -72,6 +72,24 @@ def addPomFilesToGit():
         local("git add " + POM)
         for rio_module in rio_modules:
             local("git add " + rio_module + "/" + POM)
+
+def mvnbuild():
+    print(yellow("MVN CLEAN"))
+    time.sleep(2)
+    cmd = "cd " + working_dir + " && mvn clean"
+    local(cmd)
+
+    if confirm(yellow('skip test?')):
+        cmd = "cd "+ working_dir + " && mvn package -DskipTests"
+        print(yellow("MVN PACKAGE (skip test)"))
+    else:
+        cmd = "cd "+ working_dir + " && mvn package"
+        print(yellow("MVN PACKAGE"))
+
+    time.sleep(2)
+
+    local(cmd)
+
 
 @task
 def prepare_build(version=''):
