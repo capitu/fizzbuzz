@@ -13,7 +13,7 @@ import time
 from utils import *
 
 
-COMMIT_MESSAGE = 'Auto-commit for build # '
+COMMIT_MESSAGE = "Auto-commit for build # "
 working_dir = "/Users/alsu/IdeaProjects/fizz/"
 rio_modules = []
 
@@ -41,6 +41,7 @@ def changeDeployVersion(version=''):
     print(green("change_application_version end"))
 
 
+@task
 def pushToMaster(version):
     print(yellow("prepare_branch start"))
     local("git stash")
@@ -49,6 +50,7 @@ def pushToMaster(version):
     print(green("prepare_branch end"))
 
     print(yellow("commit_build start"))
+
     addPomFilesToGit()
 
     local("git commit -m\"" + COMMIT_MESSAGE + "\"")
