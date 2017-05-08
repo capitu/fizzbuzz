@@ -30,3 +30,6 @@ buildNumber.properties
 hs_err_pid*
 .idea/
 fizz.iml
+
+bin/fabfile.pyc
+bin/utils.pyc
