@@ -55,7 +55,7 @@ def pushToMaster(version):
     addPomFilesToGit()
 
     local("git commit -m\"" + COMMIT_MESSAGE + currentVersion + "\"")
-    local("git tag -a jar" + currentVersion + " -m '" + COMMIT_MESSAGE + currentVersion + "'")
+    local("git tag -a version_" + currentVersion + " -m '" + COMMIT_MESSAGE + currentVersion + "'")
     local("git push origin develop --follow-tags")
 
     print(green("commit_build end"))
@@ -101,7 +101,6 @@ def prepare_build(version=''):
     if confirm(yellow('Do you wish to continue?')):
 
         print(green("Let's start"))
-
         print(yellow("prepare_branch start"))
         local("git stash")
         local("git checkout develop")
